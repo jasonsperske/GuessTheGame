@@ -1,0 +1,25 @@
+{
+  "name": "guess_the_game",
+  "description": "A simple tool play Guess The Game at PAX",
+  "main": "server.js",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
+    "ejs": "*",
+    "express": "4.x",
+    "express-ejs-layouts": "*",
+    "moment": "*",
+    "nconf": "*",
+    "serve-favicon": "*"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-clean-css": "^3.4.2",
+    "gulp-concat": "*",
+    "gulp-flatten": "*",
+    "gulp-sass": "*",
+    "gulp-uglify": "*"
+  }
+}

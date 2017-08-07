@@ -1,0 +1,274 @@
+$icon-font-path: "../fonts/";
+$font-family-sans-serif: "Press Start 2P";
+
+@font-face {
+	font-family: 'Press Start 2P';
+	src: url('/static/fonts/PressStart2P.eot');
+	src: url('/static/fonts/PressStart2P.eot?#iefix') format('embedded-opentype'),
+		url('/static/fonts/PressStart2P.woff') format('woff'),
+		url('/static/fonts/PressStart2P.ttf') format('truetype'),
+		url('/static/fonts/PressStart2P.svg#PressStart2P') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@import "../bower/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "../bower/font-awesome/scss/font-awesome";
+@import "clippy.css";
+
+html, body {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center center;
+	background-color: #000;
+
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
+	color: #fff;
+}
+.modal-content,.jumbotron {
+	color: #333;
+}
+.GameCredit {
+	position: relative;
+	padding-bottom: 5px;
+
+	.GameCredit-Image {
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center center;
+		background-color: #000;
+
+	  	image-rendering: -moz-crisp-edges;
+		image-rendering: -o-crisp-edges;
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: crisp-edges;
+		-ms-interpolation-mode: nearest-neighbor;
+
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		z-index: 99;
+		filter: blur(8px);
+		-webkit-filter: blur(8px);
+		-moz-filter: blur(8px);
+	}
+	.GameCredit-Game {
+		background-color: rgba(0,0,0,0.7);
+		position: relative;
+		z-index: 100;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		span {
+			font-size: 11px;
+		}
+	}
+}
+.navbar-nav > li > a.Profile {
+	padding-bottom: 7px;
+	padding-top: 11px;
+}
+
+#main, #footer>.container {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-header > h3 {
+	color: #000;
+}
+
+.form-slim {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+
+	.form-slim-heading {
+		margin-bottom: 10px;
+	}
+	.checkbox {
+	  font-weight: normal;
+	  font-size: 1.3em;
+	  margin-left: 30px;
+		margin-bottom: 10px;
+	}
+	.form-control {
+	  position: relative;
+	  height: auto;
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  padding: 10px;
+	  font-size: 16px;
+	}
+	.form-control:focus {
+	  z-index: 2;
+	}
+	input.form-slim-first {
+	  margin-bottom: -1px;
+	  border-bottom-right-radius: 0;
+	  border-bottom-left-radius: 0;
+	}
+	input.form-slim-middle {
+	  margin-bottom: -1px;
+	  border-radius: 0;
+	}
+	input.form-slim-last {
+	  margin-bottom: 10px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+}
+
+//JPlayer
+#jp_container_1 {
+	background-color: rgba(0,0,0,0.7);
+	bottom: 0;
+	display: none;
+	height: 35px;
+	position: fixed;
+	width: 100%;
+}
+.jp-seek-bar {
+	cursor: pointer;
+	height: 100%;
+	margin-left: 40px;
+	min-width: 100%;
+	position: absolute;
+	top: 0;
+	right: -40px;
+}
+.jp-play-bar {
+	background-color: #0f0;
+	opacity: 0.65;
+	position: absolute;
+	bottom: 0;
+	top: auto;
+	height: 35px;
+	left: 0;
+	width: 100%;
+}
+.jp-current-time {
+	bottom: 0;
+	font-size: 15px;
+	height: 35px;
+	line-height: 40px;
+	position: absolute;
+	right: 5px;
+	top: auto;
+}
+.jp-title {
+	left: 45px;
+	position: absolute;
+	bottom: 0;
+	top: auto;
+	height: 35px;
+	font-size: 27px;
+}
+.jp-play,.jp-pause {
+	background-color: green;
+	bottom: 0;
+	height: 35px;
+	left: 0;
+	line-height: 40px;
+	padding-left: 9px;
+	position: absolute;
+	top: auto;
+	width: 40px;
+}
+@-webkit-keyframes blinker {
+	0% { color: #FFF; }
+	50% { color: #F00; }
+	100% { color: #FFF; }
+}
+@keyframes blinker {
+	0% { color: #FFF; }
+	50% { color: #F00; }
+	100% { color: #FFF; }
+}
+.jp-playable {
+	cursor: pointer;
+}
+.jp-playing-track {
+	-webkit-animation-name: blinker;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+	-webkit-animation-duration: 1s;
+
+	animation-name: blinker;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+	animation-duration: 1s;
+}
+
+.panel-victory {
+  @include panel-variant($panel-default-border, $panel-default-text, #000, $panel-default-border);
+}
+.panel.panel-victory {
+  background-color: #000;
+  .panel-body {
+  	color: rgba(255, 255, 255, 0.3);
+    height: 150px;
+    padding-top: 50px;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+.btn-rainbow {
+  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+
+  background: linear-gradient(223deg, #00ffbd, #7d00ff, #ef583a);
+  background-size: 600% 600%;
+
+  -webkit-animation: RainbowTron 5s ease infinite;
+  -moz-animation: RainbowTron 5s ease infinite;
+  animation: RainbowTron 5s ease infinite;
+}
+
+.rainbowtron {
+  background: linear-gradient(223deg, #00ffbd, #7d00ff, #ef583a);
+  background-size: 600% 600%;
+
+  -webkit-animation: RainbowTron 5s ease infinite;
+  -moz-animation: RainbowTron 5s ease infinite;
+  animation: RainbowTron 5s ease infinite;
+
+  h1, p {
+    color: white;
+    text-shadow: 2px 1px 1px #aaa;
+  }
+}
+
+@-webkit-keyframes RainbowTron {
+  0%{background-position:81% 0%}
+  50%{background-position:20% 100%}
+  100%{background-position:81% 0%}
+}
+@-moz-keyframes RainbowTron {
+  0%{background-position:81% 0%}
+  50%{background-position:20% 100%}
+  100%{background-position:81% 0%}
+}
+@keyframes RainbowTron {
+  0%{background-position:81% 0%}
+  50%{background-position:20% 100%}
+  100%{background-position:81% 0%}
+}
