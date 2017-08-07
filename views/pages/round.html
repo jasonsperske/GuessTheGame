@@ -1,3 +1,13 @@
-<: games.forEach((game) => { :>
-  <li><:=game.name:></li>
+<h1><:=game.name:></h1>
+<ul>
+<: game.song.forEach((song) => { :>
+  <li><:=song.name:></li>
 <: }) :>
+</ul>
+
+<script type="text/javascript">
+  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(agent) {
+    agent.show();
+    agent.speak("This round has <:=game.platforms:>.");
+  });
+</script>

@@ -37,6 +37,13 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/:guid', (req, res) => {
+  var game = require(`./static/games/${req.params.guid}/index.json`)
+  res.render('pages/round', {
+    game: game
+  })
+});
+
 app.listen(settings.get('port'), () => {
   console.log('Listening for requests at http://localhost:'+settings.get('port')+'/');
 });
