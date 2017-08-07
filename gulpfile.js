@@ -29,7 +29,7 @@ gulp.task('style', function() {
 });
 
 gulp.task('JPlayer', function() {
-    return gulp.src(['src/bower/jPlayer/dist/jplayer/jquery.jplayer.swf'], {base: './'})
+    return gulp.src(['src/bower/jPlayer/dist/jplayer/jquery.jplayer.swf'], {base: './src/bower/jPlayer/dist/jplayer/'})
                .pipe(gulp.dest('static/js/'));
 });
 

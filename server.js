@@ -3,12 +3,22 @@ var settings = require('nconf').argv().env().file({file: 'settings.json'}).defau
       "port": 3000
     }),
     fs = require('fs'),
+    _ = require('underscore'),
     express = require('express'),
     ejs = require('ejs'),
     urlencodedParser = require('body-parser').urlencoded({
       extended: true
     }),
-    app = express();
+    app = express(),
+    games = (() => {
+      var games = [];
+      fs.readdirSync('static/games').forEach((i) => {
+        if(fs.lstatSync(`static/games/${i}`).isDirectory()) {
+          games.push(i);
+        }
+      });
+      return games;
+    })();
 
 ejs.delimiter = ':';
 
@@ -21,7 +31,9 @@ app.use('/static', express.static('static'));
 app.use(require('express-ejs-layouts'));
 
 app.get('/', (req, res) => {
+  games = _.shuffle(games);
   res.render('pages/index', {
+    games: _.first(games, 3)
   });
 });
 

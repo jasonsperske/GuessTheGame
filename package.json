@@ -12,7 +12,8 @@
     "express-ejs-layouts": "*",
     "moment": "*",
     "nconf": "*",
-    "serve-favicon": "*"
+    "serve-favicon": "*",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "gulp": "*",

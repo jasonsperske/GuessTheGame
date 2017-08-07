@@ -222,6 +222,9 @@ html, body {
 }
 .panel.panel-victory {
   background-color: #000;
+	.panel-heading {
+		color: #fff;
+	}
   .panel-body {
   	color: rgba(255, 255, 255, 0.3);
     height: 150px;
@@ -230,6 +233,10 @@ html, body {
     background-position: center center;
     background-repeat: no-repeat;
   }
+	.panel-footer {
+		color: #fff;
+		background-color: #000;
+	}
 }
 
 .btn-rainbow {

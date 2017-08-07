@@ -7,6 +7,9 @@
         var output = $('#'+id),
             template = ejs.compile($('#'+output.data('template')).html());
         output.append(template(data));
+      },
+      compileTemplate: function(id) {
+        return ejs.compile($('#'+id).html());
       }
     }
   };
