@@ -9,18 +9,50 @@
   <div class='col-md-9'>
     <ul>
     <: game.song.forEach((song, index) => { :>
-      <li data-game='<:=index:>'><:=song.platform:> - ???</li>
+      <li data-track='<:=index:>'><:=song.platform:> - ???</li>
     <: }) :>
     </ul>
   </div>
   <div class='col-md-3'>
-    <button class='btn btn-success'>get hint</button>
+    <button id='GetHint' class='btn btn-success'>get hint</button>
   </div>
 </div>
 <script type="text/javascript">
-  var round = <:-JSON.stringify(game):>;
-  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(agent) {
+  var round = <:-JSON.stringify(game):>,
+      player,
+      agent,
+      current_track,
+      play = function(track) {
+        current_track = track;
+        $('#jp_container_1').fadeIn();
+        player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play");
+      };
+
+  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(_agent) {
+    agent = _agent;
     agent.show();
-    agent.speak("This round has <:=game.platforms:>.");
+    player = $("#jplayer_1").jPlayer({
+	    ready: function() {
+        $('#GetHint').on('click', function() {
+          var hint;
+          if(round.song[current_track].hint.length > 0) {
+            hint = round.song[current_track].hint.shift();
+            agent.speak(hint);
+          } else {
+            agent.speak('There are no more hints!');
+            round.song[current_track].show = true;
+            $('[data-track='+current_track+']').html(round.song[current_track].name);
+          }
+        });
+        $('[data-track]').on('click', function() {
+          play($(this).data('track'));
+        });
+        agent.speak("This round has <:=game.platforms:>.");
+			},
+      swfPath: "/static/js",
+      supplied: "mp3"
+    }).on($.jPlayer.event.ended, function() {
+		 play(current_track);
+    });
   });
 </script>
