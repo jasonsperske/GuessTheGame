@@ -24,6 +24,11 @@
       current_track,
       play = function(track) {
         current_track = track;
+        if(round.song[track].show) {
+          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"});
+        } else {
+          $('html, body').css({'background-image':'none'});
+        }
         $('#jp_container_1').fadeIn();
         player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play");
       };
@@ -41,6 +46,7 @@
           } else {
             agent.speak('There are no more hints!');
             round.song[current_track].show = true;
+            $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"});
             $('[data-track='+current_track+']').html(round.song[current_track].name);
           }
         });
