@@ -25,7 +25,7 @@
     $.getJSON('/static/games/<:=game:>/index.json').then(function(game) {
       var surface = $('[data-game=<:=game:>]');
       $('h3.panel-title', surface).html(game.name);
-      $('div.panel-footer').html(game.platforms);
+      $('div.panel-footer', surface).html(game.platforms);
     });
   <: }) :>
   clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(agent) {

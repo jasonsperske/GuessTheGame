@@ -250,6 +250,14 @@ html, body {
   animation: RainbowTron 5s ease infinite;
 }
 
+.jumbotron {
+  padding-top: 12px;
+  padding-bottom: 12px;
+	h1 {
+	  font-size: 40px;
+	}
+}
+
 .rainbowtron {
   background: linear-gradient(223deg, #00ffbd, #7d00ff, #ef583a);
   background-size: 600% 600%;

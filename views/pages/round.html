@@ -1,11 +1,24 @@
-<h1><:=game.name:></h1>
-<ul>
-<: game.song.forEach((song) => { :>
-  <li><:=song.name:></li>
-<: }) :>
-</ul>
-
+<div class='row'>
+  <div class='col-md-12'>
+    <div class="jumbotron rainbowtron">
+    	<h1><:=game.name:></h1>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-9'>
+    <ul>
+    <: game.song.forEach((song, index) => { :>
+      <li data-game='<:=index:>'><:=song.platform:> - ???</li>
+    <: }) :>
+    </ul>
+  </div>
+  <div class='col-md-3'>
+    <button class='btn btn-success'>get hint</button>
+  </div>
+</div>
 <script type="text/javascript">
+  var round = <:-JSON.stringify(game):>;
   clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(agent) {
     agent.show();
     agent.speak("This round has <:=game.platforms:>.");

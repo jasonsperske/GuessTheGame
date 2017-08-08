@@ -38,7 +38,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:guid', (req, res) => {
-  var game = require(`./static/games/${req.params.guid}/index.json`)
+  var game = require(`./static/games/${req.params.guid}/index.json`);
+  game.guid = req.params.guid;
   res.render('pages/round', {
     game: game
   })
