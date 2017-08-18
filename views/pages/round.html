@@ -9,16 +9,27 @@
   <div class='col-md-9'>
     <ul>
     <: game.song.forEach((song, index) => { :>
-      <li data-track='<:=index:>'><:=song.platform:> - ???</li>
+      <li data-track='<:=index:>'>
+      <: if(song.platform) { :>
+        <:=song.platform:> -
+      <: } :>
+        ???
+      </li>
     <: }) :>
     </ul>
   </div>
   <div class='col-md-3'>
-    <button id='GetHint' class='btn btn-success'>get hint</button>
+    <h1 class='text-center'><span id='Score'>0</span>/40</h1>
+    <div id='Buttons'>
+      <button id='No' class='btn btn-danger pull-left'>No</button>
+      <button id='Yes' class='btn btn-success pull-right'>Yes</button>
+    </div>
   </div>
 </div>
 <script type="text/javascript">
   var round = <:-JSON.stringify(game):>,
+      buttons = $('#Buttons'),
+      score = 0,
       player,
       agent,
       current_track,
@@ -26,19 +37,21 @@
         current_track = track;
         if(round.song[track].show) {
           $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"});
+          buttons.hide();
         } else {
           $('html, body').css({'background-image':'none'});
+          buttons.show();
         }
         $('#jp_container_1').fadeIn();
         player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play");
       };
-
+  buttons.hide();
   clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(_agent) {
     agent = _agent;
     agent.show();
     player = $("#jplayer_1").jPlayer({
 	    ready: function() {
-        $('#GetHint').on('click', function() {
+        $('#No').on('click', function() {
           var hint;
           if(round.song[current_track].hint.length > 0) {
             hint = round.song[current_track].hint.shift();
@@ -48,7 +61,18 @@
             round.song[current_track].show = true;
             $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"});
             $('[data-track='+current_track+']').html(round.song[current_track].name);
+            buttons.hide();
           }
+        });
+        $('#Yes').on('click', function() {
+          var points = round.song[current_track].hint.length+1;
+          score += points;
+          $('#Score').html(score);
+          agent.speak('+'+points+' points!');
+          round.song[current_track].show = true;
+          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"});
+          $('[data-track='+current_track+']').html(round.song[current_track].name);
+          buttons.hide();
         });
         $('[data-track]').on('click', function() {
           play($(this).data('track'));
