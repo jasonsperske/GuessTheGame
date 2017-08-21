@@ -59,9 +59,6 @@
         }
       },
       start = new Date();
-  setInterval(function() {
-    clock.html(time(start, new Date()));
-  }, 500);
   buttons.hide();
   clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(_agent) {
     agent = _agent;
@@ -95,6 +92,9 @@
         $('[data-track]').on('click', function() {
           play($(this).data('track'));
         });
+        setInterval(function() {
+          clock.html(time(start, new Date()));
+        }, 500);
         agent.speak("This round has <:=game.platforms:>.");
 			},
       swfPath: "/static/js",
