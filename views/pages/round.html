@@ -20,6 +20,7 @@
   </div>
   <div class='col-md-3'>
     <h1 class='text-center'><span id='Score'>0</span>/<:=Object.keys(game.song).length*4:></h1>
+    <h1 id='Clock' class='text-center'>8:00</h1>
     <div id='Buttons'>
       <button id='No' class='btn btn-danger pull-left'>No</button>
       <button id='Yes' class='btn btn-success pull-right'>Yes</button>
@@ -44,7 +45,22 @@
         }
         $('#jp_container_1').fadeIn();
         player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play");
-      };
+      },
+      clock = $('#Clock'),
+      time = function(start, end) {
+        var duration = (8*60)-((end.getTime() - start.getTime())/1000), //8:00 on the clock
+            min = Math.floor((duration/60) << 0),
+            sec = Math.floor(duration % 60);
+        if(duration > 0) {
+          return min+':'+(sec < 10 ? '0'+sec : sec);
+        } else {
+          return "0:00";
+        }
+      },
+      start = new Date();
+  setInterval(function() {
+    clock.html(time(start, new Date()));
+  }, 500);
   buttons.hide();
   clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(_agent) {
     agent = _agent;
