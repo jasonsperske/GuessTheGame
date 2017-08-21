@@ -43,6 +43,7 @@
           $('html, body').css({'background-image':'none'});
           buttons.show();
         }
+        console.log(round.song[current_track].name);
         $('#jp_container_1').fadeIn();
         player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play");
       },
@@ -71,6 +72,7 @@
           var hint;
           if(round.song[current_track].hint.length > 0) {
             hint = round.song[current_track].hint.shift();
+            console.log(round.song[current_track].name+':'+hint);
             agent.speak(hint);
           } else {
             agent.speak('There are no more hints!');
