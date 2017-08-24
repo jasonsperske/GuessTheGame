@@ -1,2 +1,24 @@
 # GuessTheGame
-A simple game to play with a room full of awesome people
+A simple game to play with a room full of awesome people.
+
+## How to Create a game
+Games are defined in folders created in the `/static/games` directory.  Simple create a new folder, and add an `index.json` with your game information.  An example of such a game might look like this:
+
+    {
+      "name": "#NotAGame",
+      "platforms": "It would give it away",
+      "song": [
+        {
+          "hint": [
+            "This might look like a game but it is in fact BS",
+            "Was released on the NES and responsible for ruining Christmas of @SND_TST and @DarkRoadRun",
+            "While they aren't bitter they would like you to know this was not a game"
+          ],
+          "name": "Amagon",
+          "song": "Amagon-title-song.mp3",
+          "wallpaper": "Amagon.png"
+       }
+     ]
+   }
+
+Next you will need to place the song and wallpaper files inside this directory.  When you startup the node server it will detect this game and add it to the list of available games.
