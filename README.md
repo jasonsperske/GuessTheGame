@@ -7,6 +7,7 @@ Games are defined in folders created in the `/static/games` directory.  Simple c
     {
       "name": "#NotAGame",
       "platforms": "It would give it away",
+      "hint": "None of these are games",
       "song": [
         {
           "hint": [

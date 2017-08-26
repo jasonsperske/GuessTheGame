@@ -95,7 +95,8 @@
         setInterval(function() {
           clock.html(time(start, new Date()));
         }, 500);
-        agent.speak("This round has <:=game.platforms:>.");
+        agent.speak("<:=game.hint:>");
+        console.log("<:=game.hint:>");
 			},
       swfPath: "/static/js",
       supplied: "mp3"
