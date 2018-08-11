@@ -12,13 +12,11 @@ $font-family-sans-serif: "Press Start 2P";
 	font-style: normal;
 }
 
-@import "../bower/bootstrap-sass/assets/stylesheets/_bootstrap";
-@import "../bower/font-awesome/scss/font-awesome";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 @import "clippy.css";
 
 html, body {
-	padding-top: 30px;
-	padding-bottom: 30px;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -217,30 +215,27 @@ html, body {
 	animation-duration: 1s;
 }
 
-.panel-victory {
-  @include panel-variant($panel-default-border, $panel-default-text, #000, $panel-default-border);
-}
-.panel.panel-victory {
+.card.card-victory {
   background-color: #000;
-	.panel-heading {
+	.card-heading {
 		color: #fff;
 	}
-  .panel-body {
+  .card-body {
   	color: rgba(255, 255, 255, 0.3);
-    height: 150px;
-    padding-top: 50px;
+    height: 249px;
+    padding-top: 93px;
     text-align: center;
     background-position: center center;
     background-repeat: no-repeat;
   }
-	.panel-footer {
+	.card-footer {
 		color: #fff;
 		background-color: #000;
 	}
 }
 
 .btn-rainbow {
-  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+  @include button-variant(#fff, $info);
 
   background: linear-gradient(223deg, #00ffbd, #7d00ff, #ef583a);
   background-size: 600% 600%;

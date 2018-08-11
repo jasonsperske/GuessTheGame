@@ -1,49 +1,48 @@
-var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    sass = require('gulp-sass'),
-    cleanCSS = require('gulp-clean-css'),
-    flatten = require('gulp-flatten'),
-    concat = require('gulp-concat');
+const gulp = require('gulp')
+const uglify = require('gulp-uglify')
+const sass = require('gulp-sass')
+const cleanCSS = require('gulp-clean-css')
+const flatten = require('gulp-flatten')
+const concat = require('gulp-concat')
+const rename = require('gulp-rename')
 
-gulp.task('script', function() {
-    return gulp.src(['src/bower/jquery/dist/jquery.js',
-                     'src/bower/bootstrap-sass/assets/javascripts/bootstrap.js',
-                     'src/bower/moment/moment.js',
-                     'src/bower/jPlayer/dist/jplayer/jquery.jplayer.js',
-                     'src/js/clippy.js',
-                     'src/js/ejs.js',
-                     'src/js/randomvictory.js'
-                   ], {base: './src'})
-               .pipe(uglify())
-               .pipe(concat('randomvictory.min.js'))
-               .pipe(gulp.dest('static/js/'));
-});
+gulp.task('script', () => {
+  return gulp.src([
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/popper.js/dist/umd/popper.js',
+    'node_modules/bootstrap/dist/js/bootstrap.js',
+    'node_modules/moment/moment.js',
+    'node_modules/jplayer/dist/jplayer/jquery.jplayer.js',
+    'src/js/clippy.js',
+    'src/js/ejs.js',
+    'src/js/randomvictory.js'], {base: '.'})
+    .pipe(uglify())
+    .pipe(concat('randomvictory.min.js'))
+    .pipe(gulp.dest('static/js/'))
+})
 
-gulp.task('style', function() {
+gulp.task('style', () => {
   return gulp.src('src/style/randomvictory.scss')
-             .pipe(sass({
-               paths: [ 'src/' ]
-             }))
-             .pipe(cleanCSS())
-             .pipe(gulp.dest('static/css/'));
-});
+    .pipe(sass({paths: [ '.' ]}))
+    .pipe(cleanCSS())
+    .pipe(rename('randomvictory.min.css'))
+    .pipe(gulp.dest('static/css/'))
+})
 
-gulp.task('JPlayer', function() {
-    return gulp.src(['src/bower/jPlayer/dist/jplayer/jquery.jplayer.swf'], {base: './src/bower/jPlayer/dist/jplayer/'})
-               .pipe(gulp.dest('static/js/'));
-});
+gulp.task('jplayer', () => {
+  return gulp.src(['node_modules/jplayer/dist/jplayer/jquery.jplayer.swf'], {base: '.'})
+    .pipe(gulp.dest('static/js/'))
+})
 
+gulp.task('fonts', () => {
+  return gulp.src(['node_modules/font-awesome/fonts/*'], {base: './'})
+    .pipe(flatten())
+    .pipe(gulp.dest('static/fonts/'))
+})
 
-gulp.task('fonts', function() {
-    return gulp.src(['src/bower/font-awesome/fonts/*',
-                     'src/bower/bootstrap-sass/assets/fonts/bootstrap/*'], {base: './'})
-               .pipe(flatten())
-               .pipe(gulp.dest('static/fonts/'));
-});
+gulp.task('watch', () => {
+  gulp.watch('./src/js/*.js', ['script'])
+  gulp.watch('./src/style/*.scss', ['style'])
+})
 
-gulp.task('watch', function() {
-  gulp.watch('./src/js/*.js', ['script']);
-  gulp.watch('./src/style/*.scss', ['style']);
-});
-
-gulp.task('default', ['script', 'style', 'JPlayer', 'fonts']);
+gulp.task('default', ['script', 'style', 'jplayer', 'fonts'])

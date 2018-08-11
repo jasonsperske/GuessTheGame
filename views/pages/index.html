@@ -4,16 +4,16 @@
     <div id='Games'>
     <: games.forEach((game) => { :>
       <div class='col-md-4'>
-        <div class="panel panel-victory" data-game='<:=game:>'>
-          <div class="panel-heading">
-            <h3 class="panel-title"></h3>
+        <div class="card card-victory">
+          <div class="card-heading">
+            <h3 class="card-title"><:=game.name:></h3>
           </div>
-          <div class='panel-body' style='background-image: url(/static/images/static.gif)'>
-            <a href='/<:=game:>'>
+          <div class='card-body' style='background-image: url(/static/images/static.gif)'>
+            <a href='/<:=game.guid:>'>
               <i class='fa fa-play fa-4x'></i>
             </a>
           </div>
-          <div class="panel-footer"></div>
+          <div class="card-footer"><:=game.platforms:></div>
         </div>
       </div>
     <: }) :>
@@ -21,15 +21,8 @@
   </div>
 </div>
 <script type="text/javascript">
-  <: games.forEach((game) => { :>
-    $.getJSON('/static/games/<:=game:>/index.json').then(function(game) {
-      var surface = $('[data-game=<:=game:>]');
-      $('h3.panel-title', surface).html(game.name);
-      $('div.panel-footer', surface).html(game.platforms);
-    });
-  <: }) :>
-  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(agent) {
-    agent.show();
-    agent.speak("Welcome to your doom!");
-  });
+  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function (agent) {
+    agent.show()
+    agent.speak('Welcome to your doom!')
+  })
 </script>
