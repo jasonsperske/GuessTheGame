@@ -2,15 +2,15 @@
   <div class='col-md-12'>
     <h1>Select your game!</h1>
     <div id='Games'>
-    <: games.forEach((game) => { :>
+    <: games.forEach((game, index) => { :>
       <div class='col-md-4'>
         <div class="card card-victory">
           <div class="card-heading">
             <h3 class="card-title"><:=game.name:></h3>
           </div>
           <div class='card-body' style='background-image: url(/static/images/static.gif)'>
-            <a href='/<:=game.guid:>'>
-              <i class='fa fa-play fa-4x'></i>
+            <a href='/<:=game.guid:>' data-choice='<:=(index+1):>'>
+              <:=(index+1):>
             </a>
           </div>
           <div class="card-footer"><:=game.platforms:></div>
@@ -25,4 +25,11 @@
     agent.show()
     agent.speak('Welcome to your doom!')
   })
+  document.onkeypress = function (e) {
+    var event = e || window.event
+    var game = $('a[data-choice='+(event.charCode - 48)+']')
+    if (game.length === 1) {
+      window.location.href = game.attr('href')
+    }
+  }
 </script>

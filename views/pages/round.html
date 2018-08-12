@@ -28,80 +28,90 @@
   </div>
 </div>
 <script type="text/javascript">
-  var round = <:-JSON.stringify(game):>,
-      buttons = $('#Buttons'),
-      score = 0,
-      player,
-      agent,
-      current_track,
-      play = function(track) {
-        current_track = track;
+  var round = <:-JSON.stringify(game):>
+  var buttons = $('#Buttons')
+  var score = 0
+  var player
+  var agent
+  var current_track
+  var play = function (track) {
+        current_track = track
         if(round.song[track].show) {
-          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"});
-          buttons.hide();
+          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"})
+          buttons.hide()
         } else {
-          $('html, body').css({'background-image':'none'});
-          buttons.show();
+          $('html, body').css({'background-image':'none'})
+          buttons.show()
         }
-        console.log(round.song[current_track].name);
-        $('#jp_container_1').fadeIn();
-        player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play");
-      },
-      clock = $('#Clock'),
-      time = function(start, end) {
-        var duration = (8*60)-((end.getTime() - start.getTime())/1000), //8:00 on the clock
-            min = Math.floor((duration/60) << 0),
-            sec = Math.floor(duration % 60);
+        console.log(round.song[current_track].name)
+        $('#jp_container_1').fadeIn()
+        player.jPlayer("setMedia", { mp3: '/static/games/<:=game.guid:>/'+round.song[track].song }).jPlayer("play")
+      }
+  var clock = $('#Clock')
+  var time = function(start, end) {
+        var duration = (8*60)-((end.getTime() - start.getTime())/1000) //8:00 on the clock
+        var min = Math.floor((duration/60) << 0)
+        var sec = Math.floor(duration % 60)
         if(duration > 0) {
-          return min+':'+(sec < 10 ? '0'+sec : sec);
+          return min+':'+(sec < 10 ? '0'+sec : sec)
         } else {
-          return "0:00";
+          return "0:00"
         }
-      },
-      start = new Date();
-  buttons.hide();
-  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function(_agent) {
-    agent = _agent;
-    agent.show();
+      }
+  var start = new Date()
+  buttons.hide()
+  clippy.load({name:'Clippy', path:'/static/images/agents/'}, function (_agent) {
+    agent = _agent
+    agent.show()
     player = $("#jplayer_1").jPlayer({
-	    ready: function() {
+	    ready: function () {
         $('#No').on('click', function() {
-          var hint;
+          var hint
           if(round.song[current_track].hint.length > 0) {
-            hint = round.song[current_track].hint.shift();
-            console.log(round.song[current_track].name+':'+hint);
-            agent.speak(hint);
+            hint = round.song[current_track].hint.shift()
+            console.log(round.song[current_track].name+':'+hint)
+            agent.speak(hint)
           } else {
-            agent.speak('There are no more hints!');
-            round.song[current_track].show = true;
-            $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"});
-            $('[data-track='+current_track+']').html(round.song[current_track].name);
-            buttons.hide();
+            agent.speak('There are no more hints!')
+            round.song[current_track].show = true
+            $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"})
+            $('[data-track='+current_track+']').html(round.song[current_track].name)
+            buttons.hide()
           }
-        });
-        $('#Yes').on('click', function() {
-          var points = round.song[current_track].hint.length+1;
-          score += points;
-          $('#Score').html(score);
-          agent.speak('+'+points+' points!');
-          round.song[current_track].show = true;
-          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"});
-          $('[data-track='+current_track+']').html(round.song[current_track].name);
-          buttons.hide();
-        });
-        $('[data-track]').on('click', function() {
-          play($(this).data('track'));
-        });
-        setInterval(function() {
-          clock.html(time(start, new Date()));
-        }, 500);
-        agent.speak("<:=game.hint:>");
-        console.log("<:=game.hint:>");
+        })
+        $('#Yes').on('click', function () {
+          var points = round.song[current_track].hint.length+1
+          score += points
+          $('#Score').html(score)
+          agent.speak('+'+points+' points!')
+          round.song[current_track].show = true
+          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"})
+          $('[data-track='+current_track+']').html(round.song[current_track].name)
+          buttons.hide()
+        })
+        $('[data-track]').on('click', function () {
+          play($(this).data('track'))
+        })
+        setInterval(function () {
+          clock.html(time(start, new Date()))
+        }, 500)
+        agent.speak("<:=game.hint:>")
+        console.log("<:=game.hint:>")
 			},
       swfPath: "/static/js",
       supplied: "mp3"
-    }).on($.jPlayer.event.ended, function() {
-		 play(current_track);
-    });
-  });
+    }).on($.jPlayer.event.ended, function () {
+		 play(current_track)
+    })
+  })
+  document.onkeypress = function (e) {
+    var event = e || window.event
+    var keyMap = {
+      110: 'NO',
+      121: 'YES',
+      32: 'NEXT',
+      103: 'GUESS'
+    }
+    console.log(keyMap[event.charCode])
+  }
 </script>

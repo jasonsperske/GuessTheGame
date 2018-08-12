@@ -219,14 +219,18 @@ html, body {
   background-color: #000;
 	.card-heading {
 		color: #fff;
+		text-align: center;
 	}
   .card-body {
   	color: rgba(255, 255, 255, 0.3);
     height: 249px;
-    padding-top: 93px;
+    padding-top: 30px;
     text-align: center;
     background-position: center center;
     background-repeat: no-repeat;
+		a {
+			font-size: 140px;
+		}
   }
 	.card-footer {
 		color: #fff;
