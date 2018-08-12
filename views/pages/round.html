@@ -67,6 +67,7 @@
 	    ready: function () {
         $('#No').on('click', function() {
           var hint
+          player.jPlayer("play")
           if(round.song[current_track].hint.length > 0) {
             hint = round.song[current_track].hint.shift()
             console.log(round.song[current_track].name+':'+hint)
@@ -81,6 +82,7 @@
         })
         $('#Yes').on('click', function () {
           var points = round.song[current_track].hint.length+1
+          player.jPlayer("play")
           score += points
           $('#Score').html(score)
           agent.speak('+'+points+' points!')
@@ -107,11 +109,27 @@
   document.onkeypress = function (e) {
     var event = e || window.event
     var keyMap = {
-      110: 'NO',
-      121: 'YES',
-      32: 'NEXT',
-      103: 'GUESS'
+      110: function () {
+        $('#No').trigger('click')
+      },
+      121: function () {
+        $('#Yes').trigger('click')
+      },
+      32: function () {
+        // NEXT song
+        if(round.song[current_track].show) {
+
+        }
+      },
+      103: function () {
+        // GUESS
+        if(!round.song[current_track].show) {
+          player.jPlayer("pause")
+        }
+      }
     }
-    console.log(keyMap[event.charCode])
+    if (keyMap.hasOwnProperty(event.charCode)) {
+      keyMap[event.charCode]()
+    }
   }
 </script>
