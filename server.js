@@ -9,14 +9,16 @@ const express = require('express')
 const ejs = require('ejs')
 const app = express()
 
-let games = (() => {
+let {games, gamesData} = (() => {
   var games = []
+  var gamesData = {}
   fs.readdirSync('static/games').forEach((i) => {
     if (fs.lstatSync(`static/games/${i}`).isDirectory()) {
-      games.push(require(`./static/games/${i}/index.json`))
+      games.push(i)
+      gamesData[i] = require(`./static/games/${i}/index.json`)
     }
   })
-  return games
+  return {games, gamesData}
 })()
 
 ejs.delimiter = ':'
@@ -32,18 +34,20 @@ app.use(require('serve-favicon')(path.join(__dirname, '/static/favicon.ico')))
 
 app.get('/', (req, res) => {
   games = _.shuffle(games)
+  let choices = []
+  _.first(games, 3).forEach((game) => {
+    choices.push(gamesData[game])
+  })
   res.render('pages/index', {
-    games: _.first(games, 3)
+    games: choices
   })
 })
 
 app.get('/:guid', (req, res) => {
   try {
-    var game = require(`./static/games/${req.params.guid}/index.json`)
     games = _.without(games, req.params.guid)
-    game.guid = req.params.guid
     res.render('pages/round', {
-      game: game
+      game: gamesData[req.params.guid]
     })
   } catch (e) {}
 })
