@@ -37,10 +37,10 @@
   var play = function (track) {
         current_track = track
         if(round.song[track].show) {
-          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"})
+          $('html').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"})
           buttons.hide()
         } else {
-          $('html, body').css({'background-image':'none'})
+          $('html').css({'background-image':'none'})
           buttons.show()
         }
         console.log(round.song[current_track].name)
@@ -68,6 +68,7 @@
         $('#No').on('click', function() {
           var hint
           player.jPlayer("play")
+          $('html').removeClass('guessing')
           if(round.song[current_track].hint.length > 0) {
             hint = round.song[current_track].hint.shift()
             console.log(round.song[current_track].name+':'+hint)
@@ -75,7 +76,7 @@
           } else {
             agent.speak('There are no more hints!')
             round.song[current_track].show = true
-            $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"})
+            $('html').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"})
             $('[data-track='+current_track+']').html(round.song[current_track].name)
             buttons.hide()
           }
@@ -83,11 +84,12 @@
         $('#Yes').on('click', function () {
           var points = round.song[current_track].hint.length+1
           player.jPlayer("play")
+          $('html').removeClass('guessing')
           score += points
           $('#Score').html(score)
           agent.speak('+'+points+' points!')
           round.song[current_track].show = true
-          $('html, body').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"})
+          $('html').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[current_track].wallpaper+")"})
           $('[data-track='+current_track+']').html(round.song[current_track].name)
           buttons.hide()
         })
@@ -100,8 +102,8 @@
         agent.speak("<:=game.hint:>")
         console.log("<:=game.hint:>")
 			},
-      swfPath: "/static/js",
-      supplied: "mp3"
+      swfPath: '/static/js',
+      supplied: 'mp3'
     }).on($.jPlayer.event.ended, function () {
 		 play(current_track)
     })
@@ -124,7 +126,8 @@
       103: function () {
         // GUESS
         if(!round.song[current_track].show) {
-          player.jPlayer("pause")
+          player.jPlayer('pause')
+          $('html').addClass('guessing')
         }
       }
     }

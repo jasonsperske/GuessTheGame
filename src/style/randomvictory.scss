@@ -16,6 +16,12 @@ $font-family-sans-serif: "Press Start 2P";
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
 @import "clippy.css";
 
+html {
+	background-color: #000;
+}
+body {
+	background-color: transparent;
+}
 html, body {
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -25,7 +31,6 @@ html, body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center center;
-	background-color: #000;
 
 	image-rendering: -moz-crisp-edges;
 	image-rendering: -o-crisp-edges;
@@ -33,6 +38,39 @@ html, body {
 	image-rendering: crisp-edges;
 	-ms-interpolation-mode: nearest-neighbor;
 	color: #fff;
+}
+
+@keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: -100px -100px; }
+}
+@-moz-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: -100px -100px; }
+}
+@-webkit-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: -100px 100px; }
+}
+@-ms-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: -100px -100px; }
+}
+@-o-keyframes animatedBackground {
+	0% { background-position: 0 0; }
+	100% { background-position: -100px -100px; }
+}
+
+html.guessing {
+	background-repeat: repeat;
+	background-image: url('/static/images/guess.gif');
+	background-size: 100px 100px;
+	background-position: 0px 0px;
+	animation: animatedBackground 10s linear infinite;
+	-moz-animation: animatedBackground 10s linear infinite;
+	-webkit-animation: animatedBackground 10s linear infinite;
+	-ms-animation: animatedBackground 10s linear infinite;
+	-o-animation: animatedBackground 10s linear infinite;
 }
 .modal-content,.jumbotron {
 	color: #333;
@@ -220,6 +258,7 @@ html, body {
 	.card-heading {
 		color: #fff;
 		text-align: center;
+		height: 125px;
 	}
   .card-body {
   	color: rgba(255, 255, 255, 0.3);
