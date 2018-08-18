@@ -4,9 +4,7 @@
     <div id='Games' class='card-deck'>
     <: games.forEach((game, index) => { :>
         <div class="card card-victory mb-4">
-          <div class="card-header">
-            <h3 class="card-title"><:=game.name:></h3>
-          </div>
+          <h5 class="card-title"><:=game.name:></h5>
           <div class='card-body' style='background-image: url(/static/images/static.gif)'>
             <a href='/<:=game.guid:>' data-choice='<:=(index+1):>'>
               <:=(index+1):>

@@ -40,7 +40,7 @@
           $('html').css({'background-image':"url(/static/games/<:=game.guid:>/"+round.song[track].wallpaper+")"})
           buttons.hide()
         } else {
-          $('html').css({'background-image':'none'})
+          $('html').removeAttr('style')
           buttons.show()
         }
         console.log(round.song[current_track].name)

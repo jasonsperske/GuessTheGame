@@ -90,7 +90,7 @@ html.guessing {
 		background-position: center center;
 		background-color: #000;
 
-	  	image-rendering: -moz-crisp-edges;
+  	image-rendering: -moz-crisp-edges;
 		image-rendering: -o-crisp-edges;
 		image-rendering: -webkit-optimize-contrast;
 		image-rendering: crisp-edges;
@@ -255,10 +255,12 @@ html.guessing {
 
 .card.card-victory {
   background-color: #000;
-	.card-heading {
+	.card-title {
 		color: #fff;
 		text-align: center;
 		height: 125px;
+		font-size: 30px;
+		padding-top: 20px;
 	}
   .card-body {
   	color: rgba(255, 255, 255, 0.3);
