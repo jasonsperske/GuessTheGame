@@ -99,6 +99,7 @@
         setInterval(function () {
           clock.html(time(start, new Date()))
         }, 500)
+        $('[data-track=0]').trigger('click')
         agent.speak("<:=game.hint:>")
         console.log("<:=game.hint:>")
 			},
@@ -117,12 +118,6 @@
       121: function () {
         $('#Yes').trigger('click')
       },
-      32: function () {
-        // NEXT song
-        if(round.song[current_track].show) {
-
-        }
-      },
       103: function () {
         // GUESS
         if(!round.song[current_track].show) {
@@ -131,7 +126,11 @@
         }
       }
     }
-    if (keyMap.hasOwnProperty(event.charCode)) {
+    if (event.charCode >= 48 && event.charCode <= 57) {
+      if(round.song[current_track].show) {
+        $('[data-track='+(event.charCode-48)+']').trigger('click')
+      }
+    } else if (keyMap.hasOwnProperty(event.charCode)) {
       keyMap[event.charCode]()
     }
   }
