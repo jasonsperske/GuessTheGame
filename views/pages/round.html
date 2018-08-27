@@ -7,7 +7,7 @@
 </div>
 <div class='row'>
   <div class='col-md-9'>
-    <ul>
+    <ol>
     <: game.song.forEach((song, index) => { :>
       <li data-track='<:=index:>'>
       <: if(song.platform) { :>
@@ -16,7 +16,7 @@
         ???
       </li>
     <: }) :>
-    </ul>
+  </ol>
   </div>
   <div class='col-md-3'>
     <h1 class='text-center'><span id='Score'>0</span>/<:=Object.keys(game.song).length*4:></h1>
@@ -27,6 +27,11 @@
     </div>
   </div>
 </div>
+<style>
+  ol {
+    padding-left: 60px;
+  }
+</style>
 <script type="text/javascript">
   var round = <:-JSON.stringify(game):>
   var buttons = $('#Buttons')
@@ -128,7 +133,11 @@
     }
     if (event.charCode >= 48 && event.charCode <= 57) {
       if(round.song[current_track].show) {
-        $('[data-track='+(event.charCode-48)+']').trigger('click')
+        if (event.charCode == 48) {
+          $('[data-track=9]').trigger('click')
+        } else {
+          $('[data-track='+(event.charCode-49)+']').trigger('click')
+        }
       }
     } else if (keyMap.hasOwnProperty(event.charCode)) {
       keyMap[event.charCode]()
