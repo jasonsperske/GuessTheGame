@@ -6,7 +6,7 @@ const flatten = require('gulp-flatten')
 const concat = require('gulp-concat')
 const rename = require('gulp-rename')
 
-gulp.task('script', () => {
+function javascript () {
   return gulp.src([
     'node_modules/jquery/dist/jquery.js',
     'node_modules/popper.js/dist/umd/popper.js',
@@ -15,34 +15,29 @@ gulp.task('script', () => {
     'node_modules/jplayer/dist/jplayer/jquery.jplayer.js',
     'src/js/clippy.js',
     'src/js/ejs.js',
-    'src/js/randomvictory.js'], {base: '.'})
+    'src/js/randomvictory.js'], { base: '.' })
     .pipe(uglify())
     .pipe(concat('randomvictory.min.js'))
     .pipe(gulp.dest('static/js/'))
-})
+}
 
-gulp.task('style', () => {
+function css () {
   return gulp.src('src/style/randomvictory.scss')
-    .pipe(sass({paths: [ '.' ]}))
+    .pipe(sass({ paths: [ '.' ] }))
     .pipe(cleanCSS())
     .pipe(rename('randomvictory.min.css'))
     .pipe(gulp.dest('static/css/'))
-})
+}
 
-gulp.task('jplayer', () => {
-  return gulp.src(['node_modules/jplayer/dist/jplayer/jquery.jplayer.swf'], {base: '.'})
+function jplayer () {
+  return gulp.src(['node_modules/jplayer/dist/jplayer/jquery.jplayer.swf'], { base: '.' })
     .pipe(gulp.dest('static/js/'))
-})
+}
 
-gulp.task('fonts', () => {
-  return gulp.src(['node_modules/font-awesome/fonts/*'], {base: './'})
+function fonts () {
+  return gulp.src(['node_modules/font-awesome/fonts/*'], { base: './' })
     .pipe(flatten())
     .pipe(gulp.dest('static/fonts/'))
-})
+}
 
-gulp.task('watch', () => {
-  gulp.watch('./src/js/*.js', ['script'])
-  gulp.watch('./src/style/*.scss', ['style'])
-})
-
-gulp.task('default', ['script', 'style', 'jplayer', 'fonts'])
+exports.default = gulp.series(javascript, css, jplayer, fonts)
