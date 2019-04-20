@@ -23,21 +23,22 @@ body {
 	background-color: transparent;
 }
 html, body {
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
 
-	image-rendering: -moz-crisp-edges;
-	image-rendering: -o-crisp-edges;
-	image-rendering: -webkit-optimize-contrast;
-	image-rendering: crisp-edges;
-	-ms-interpolation-mode: nearest-neighbor;
-	color: #fff;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+  color: #fff;
 }
 
 @keyframes animatedBackground {
