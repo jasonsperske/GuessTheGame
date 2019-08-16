@@ -62,6 +62,9 @@ html, body {
 	100% { background-position: -100px -100px; }
 }
 
+ol.trackList {
+  padding-left: 60px;
+}
 html.guessing {
 	background-repeat: repeat;
 	background-image: url('../images/guess.gif');
