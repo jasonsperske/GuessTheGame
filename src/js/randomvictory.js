@@ -1,5 +1,5 @@
 /* globals $, ejs, clippy, RandomVictory */
-;(window => {
+;(function (window) {
   'use strict'
   const RandomVictory = {
     ui: {
