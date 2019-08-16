@@ -1,0 +1,118 @@
+{
+  "guid": "ComicsGames",
+  "name": "Comics Games",
+  "platforms": "3 x NES, Genesis, Master System, Arcade, N64, PS2, 2 x Xbox 360",
+  "hint": "I hope you are all caught up on your Avengers, DC Universe and Dark Universal movies",
+  "song": [
+    {
+      "hint": [
+        "Released in North America on May 31, 1999",
+        "\"The greatest N64 game of all time\" - said nobody ever",
+        "The first 3D game featuring the title character"
+      ],
+      "platform": "N64",
+      "name": "Superman",
+      "song": "Superman64.mp3",
+      "wallpaper": "Superman64.png"
+    },
+    {
+      "hint": [
+        "Released in 1995 and developed and published by Sega, also came with it's soundtrack on CD",
+        "Technically speaking not based on a real comic",
+        "A game is that it is set within the panels of a comic book"
+      ],
+      "platform": "Genesis",
+      "name": "Comix Zone",
+      "song": "ComixZone.mp3",
+      "wallpaper": "ComixZone.jpg"
+    },
+    {
+      "hint": [
+        "Released November 2003",
+        "Use your armor",
+        "The intro video and credits use the Marilyn Manson"
+      ],
+      "platform": "PS2",
+      "name": "Spawn: Armageddon",
+      "song": "SpawnArmageddon.mp3",
+      "wallpaper": "SpawnArmageddon.jpg"
+    },
+    {
+      "hint": [
+        "Knows that he in a gameshow panel right now",
+        "If you play him wrong he will let you know",
+        "Based on a character created by Rob Liefeld"
+      ],
+      "platform": "XBox 360",
+      "name": "Deadpool",
+      "song": "Deadpool.mp3",
+      "wallpaper": "Deadpool.jpg"
+    },
+    {
+      "hint": [
+        "Technically part of the DCEU or should I say the 'Worlds of DC'",
+        "Based on a wordless comic strip published in Mad magazine",
+        "Play as Black or White"
+      ],
+      "platform": "NES",
+      "name": "Spy vs. Spy",
+      "song": "SpyVsSpy.mp3",
+      "wallpaper": "SpyVsSpy.jpg"
+    },
+    {
+      "hint": [
+        "Developed by Raven Software and Published by Activision",
+        "Based on just about everything",
+        "Only the best game ever to bless us in the Marvel World"
+      ],
+      "platform": "XBox 360",
+      "name": "Marvel: Ultimate Alliance",
+      "song": "MarvelUltimateAlliance.mp3",
+      "wallpaper": "MarvelUltimateAlliance.png"
+    },
+    {
+      "hint": [
+        "Developed and Published by Sunsoft and released for the NES and GameBoy in 1990",
+        "Loosely based on the 1989 film of the same name",
+        "For a guy who doesn't kill he sure punches a lot"
+      ],
+      "platform": "NES",
+      "name": "Batman",
+      "song": "Batman.mp3",
+      "wallpaper": "Batman.png"
+    },
+    {
+      "hint": [
+        "An action hack and slash video game based on a long running comic series",
+        "The last Nickelodeon game to be published by Activision ",
+        "General Krang learns his lesson the hard way"
+      ],
+      "platform": "Xbox One",
+      "name": "Teenage Mutant Ninja Turtles: Mutants in Manhattan",
+      "song": "TeenageMutantNinjaTurtlesMutantsInManhattan.mp3",
+      "wallpaper": "TeenageMutantNinjaTurtlesMutantsInManhattan.png"
+    },
+    {
+      "hint": [
+        "The game is loosely based on the story arc of the same name which was published in the early 1990s",
+        "Based on a classic Marvel character",
+        "Doctor Octopus is setting his master plan into action to take over the world with the help of the Sinister Six"
+      ],
+      "platform": "Master System",
+      "name": "Spider-Man: Return of the Sinister Six",
+      "song": "SpiderManReturnOfTheSinisterSix.mp3",
+      "wallpaper": "SpiderManReturnOfTheSinisterSix.png"
+    },
+    {
+      "hint": [
+        "Wait for it, wait for it",
+        "Wait did you not wait for it?",
+        "Yes it really is just X-Men"
+      ],
+      "platform": "Arcade",
+      "name": "X-Men",
+      "song": "XMen.mp3",
+      "wallpaper": "XMen.png"
+    }
+  ]
+}

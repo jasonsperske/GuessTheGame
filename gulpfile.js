@@ -18,7 +18,7 @@ function javascript () {
     'src/js/randomvictory.js'], { base: '.' })
     .pipe(uglify())
     .pipe(concat('randomvictory.min.js'))
-    .pipe(gulp.dest('static/js/'))
+    .pipe(gulp.dest('rootPath/js/'))
 }
 
 function css () {
@@ -26,18 +26,18 @@ function css () {
     .pipe(sass({ paths: [ '.' ] }))
     .pipe(cleanCSS())
     .pipe(rename('randomvictory.min.css'))
-    .pipe(gulp.dest('static/css/'))
+    .pipe(gulp.dest('rootPath/css/'))
 }
 
 function jplayer () {
   return gulp.src(['node_modules/jplayer/dist/jplayer/jquery.jplayer.swf'], { base: '.' })
-    .pipe(gulp.dest('static/js/'))
+    .pipe(gulp.dest('rootPath/js/'))
 }
 
 function fonts () {
   return gulp.src(['node_modules/font-awesome/fonts/*'], { base: './' })
     .pipe(flatten())
-    .pipe(gulp.dest('static/fonts/'))
+    .pipe(gulp.dest('rootPath/fonts/'))
 }
 
 exports.default = gulp.series(javascript, css, jplayer, fonts)

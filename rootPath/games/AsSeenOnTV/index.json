@@ -1,0 +1,118 @@
+{
+  "guid": "AsSeenOnTV",
+  "name": "As Seen on TV",
+  "platforms": "4 x NES, PS2, PS3, PS4, DS and more",
+  "hint": "At least you aren't rotting your brain sitting in front of TV",
+  "song": [
+    {
+      "hint": [
+        "Originally released on the Apple II and Commodore 64",
+        "The game tried to recreate the look and feel from the original Richard Dawson-hosted series",
+        "Show me... Hint 3!"
+      ],
+      "platform": "NES",
+      "name": "Family Feud",
+      "song": "FamilyFeud.mp3",
+      "wallpaper": "FamilyFeud.png"
+    },
+    {
+      "hint": [
+        "Hey! we're all a little looney",
+        "But in this cartoony",
+        "We're tiny, We're toony"
+      ],
+      "platform": "NES",
+      "name": "Tiny Toons",
+      "song": "TinyToons.mp3",
+      "wallpaper": "TinyToons.png"
+    },
+    {
+      "hint": [
+        "IGN criticized the Wii version's character design, calling it \"freaktacular\"",
+        "The show was hosted by actor-comedian Howie Mandel",
+        "The banker is willing to offer you $10"
+      ],
+      "platform": "DS",
+      "name": "Deal or No Deal",
+      "song": "DealOrNoDeal.mp3",
+      "wallpaper": "DealOrNoDeal.jpg"
+    },
+    {
+      "hint": [
+        "An episodic adventure game video game developed and published by Telltale Games",
+        "Based on television series developed by Frank Darabont for AMC that is based on the comic book series of the same name",
+        "The game takes place in the same fictional world as the comic, with events occurring shortly after the onset of the zombie apocalypse in Georgia"
+      ],
+      "platform": "multi",
+      "name": "The Walking Dead",
+      "song": "TheWalkingDead.mp3",
+      "wallpaper": "TheWalkingDead.png"
+    },
+    {
+      "hint": [
+        "a 2017 role-playing video game developed by Ubisoft San Francisco and published by Ubisoft",
+        "The game is played from a 2.5D third-person perspective, replicating the aesthetic of the television series.",
+        "You Killed Kenny, you BASTARD"
+      ],
+      "platform": "PS4",
+      "name": "South Park: The Fractured but Whole",
+      "song": "SouthParkTheFracturedButWhole.mp3",
+      "wallpaper": "SouthParkTheFracturedButWhole.png"
+    },
+    {
+      "hint": [
+        "One of the longest running Westerns",
+        "Wow this gun is getting really smokey right now",
+        "Gun Dang it!  You have been Smoked!"
+      ],
+      "platform": "NES",
+      "name": "Gun Smoke",
+      "song": "GunSmoke.mp3",
+      "wallpaper": "GunSmoke.png"
+    },
+    {
+      "hint": [
+        "Based on a TV game show than ran on Nickelodeon in 1986 to 1993",
+        "It remains Nickelodeon's longest-running game show",
+        "I Dare you to get this"
+      ],
+      "platform": "NES",
+      "name": "Double Dare",
+      "song": "DoubleDare.mp3",
+      "wallpaper": "DoubleDare.jpg"
+    },
+    {
+      "hint": [
+        "The OG grand theft auto",
+        "Simpson, Homer Simpson, he's the greatest guy in history, Simpson, Homer Simpsone, He's About To Hit a Chestnut Tree",
+        "A felony as defined by most states as leaving the scene of an accident where there is any type of injury to a person, whether the injured person is a pedestrian or an occupant of a vehicle!"
+      ],
+      "platform": "PS2",
+      "name": "Simpsons Hit n Run",
+      "song": "SimpsonsHitNRun.mp3",
+      "wallpaper": "SimpsonsHitNRun.png"
+    },
+    {
+      "hint": [
+        "Developed by High Voltage Software, published by 2K Games and released for the PS2 October 2006",
+        "Based on an American animated sitcom created by Seth MacFarlane for the Fox",
+        "Shut up Meg!"
+      ],
+      "platform": "PS2",
+      "name": "Family Guy",
+      "song": "FamilyGuy.mp3",
+      "wallpaper": "FamilyGuy.png"
+    },
+    {
+      "hint": [
+        "Published by Disney Interactive Studios and released in April 2008",
+        "The basic premise for the game is after winning a toy contest you start an endeavor to sell bobbleheads depicting the President of the United States to the citizens of Washington, D.C.",
+        "Tasks involve sneaking past Secret Service agents, examining rooms for specific items, throwing pastries at hypnotized teachers, and talking to non-playable characters. "
+      ],
+      "platform": "DS",
+      "name": "Cory in the House",
+      "song": "CoryInTheHouse.mp3",
+      "wallpaper": "CoryInTheHouse.png"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 A simple game to play with a room full of awesome people.
 
 ## How to create a game
-Games are defined in folders created in the `/static/games` directory.  Simple create a new folder, and add an `index.json` with your game information.  An example of such a game might look like this:
+Games are defined in folders created in the `/rootPath/games` directory.  Simple create a new folder, and add an `index.json` with your game information.  An example of such a game might look like this:
 
     {
       "guid": "NotAGame",

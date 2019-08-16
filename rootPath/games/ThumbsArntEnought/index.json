@@ -1,0 +1,118 @@
+{
+  "guid": "ThumbsArntEnought",
+  "name": "Your Thumbs are not Enough",
+  "platforms": "4 x NES, 2 x SNES, 2 x PS1, Dreamcast, Xbox",
+  "hint": "",
+  "song": [
+    {
+      "hint": [
+        "Zuckerberg vowed to eat only what he hunted. Inspired by this game?",
+        "Probably not. He was one and a half during the US release.",
+        "Hint, it's Duck Hunt."
+      ],
+      "platform": "NES",
+      "name": "Duck Hunt",
+      "song": "DuckHunt.mp3",
+      "wallpaper": "DuckHunt.png"
+    },
+    {
+      "hint": [
+        "You are not as cool as you think you are",
+        "Brought the PowerPad back",
+        "Admittedly though Carrie Swidecki is an amazing person"
+      ],
+      "platform": "PS1",
+      "name": "Dance Dance Revolution",
+      "song": "DanceDanceRevolution.mp3",
+      "wallpaper": "DanceDanceRevolution.jpg"
+    },
+    {
+      "hint": [
+        "So you just blew $150 on the controller",
+        "Used the Power Glove",
+        "Commercial looks more fun than the game"
+      ],
+      "platform": "NES",
+      "name": "Super Glove Ball",
+      "song": "SuperGloveBall.mp3",
+      "wallpaper": "SuperGloveBall.png"
+    },
+    {
+      "hint": [
+        "Released in 1997 by Namco",
+        "Used a GunCon",
+        "Were outta time.... it's a crisis"
+      ],
+      "platform": "PS1",
+      "name": "Time Crisis",
+      "song": "TimeCrisis.mp3",
+      "wallpaper": "TimeCrisis.jpg"
+    },
+    {
+      "hint": [
+        "I'm about to CAPSLOCK that zombie!",
+        "Used a keyboard",
+        "Unsettling cameo of Mavis Beacon"
+      ],
+      "platform": "Dreamcast",
+      "name": "Typing of the Dead",
+      "song": "TypingOfTheDead.mp3",
+      "wallpaper": "TypingOfTheDead.jpg"
+    },
+    {
+      "hint": [
+        "It's Duck Hunt with humans",
+        "Or if you like, you can shoot a can",
+        "He's got an alley named after him"
+      ],
+      "platform": "NES",
+      "name": "Hogan's Alley",
+      "song": "HogansAlley.mp3",
+      "wallpaper": "HogansAlley.jpg"
+    },
+    {
+      "hint": [
+        "Not everyone is an artist",
+        "Used a mouse",
+        "Is there ANYTHING Mario can't do!?"
+      ],
+      "platform": "SNES",
+      "name": "Mario Paint",
+      "song": "MarioPaint.mp3",
+      "wallpaper": "MarioPaint.png"
+    },
+    {
+      "hint": [
+        "You have to save King Fret and his son Prince Pine of Jewellery Land",
+        "Used the Super Scope 6",
+        "You know what the Mario games really needs? a gun!"
+      ],
+      "platform": "SNES",
+      "name": "Yoshi's Safari",
+      "song": "YoshisSafari.mp3",
+      "wallpaper": "YoshisSafari.jpg"
+    },
+    {
+      "hint": [
+        "These legs are a moving but no jump'n is a happen'in",
+        "Used Power Pad",
+        "Stadium Events for $9.99"
+      ],
+      "platform": "NES",
+      "name": "Track & Field",
+      "song": "TrackField.mp3",
+      "wallpaper": "TrackField.jpg"
+    },
+    {
+      "hint": [
+        "Released In November, 2002 from Capcom",
+        "You can enjoy this right now in the Classic Console Freeplay",
+        "Do not \"Steel\" this Battalion"
+      ],
+      "platform": "XBox",
+      "name": "Steel Battalion",
+      "song": "SteelBattalion.mp3",
+      "wallpaper": "SteelBattalion.jpg"
+    }
+  ]
+}
