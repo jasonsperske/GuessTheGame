@@ -1,13 +1,13 @@
-$fa-font-path: "/static/fonts/" !default;
+$fa-font-path: "../fonts/" !default;
 $font-family-sans-serif: "Press Start 2P";
 
 @font-face {
 	font-family: 'Press Start 2P';
-	src: url('/static/fonts/PressStart2P.eot');
-	src: url('/static/fonts/PressStart2P.eot?#iefix') format('embedded-opentype'),
-		url('/static/fonts/PressStart2P.woff') format('woff'),
-		url('/static/fonts/PressStart2P.ttf') format('truetype'),
-		url('/static/fonts/PressStart2P.svg#PressStart2P') format('svg');
+	src: url('../fonts/PressStart2P.eot');
+	src: url('../fonts/PressStart2P.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/PressStart2P.woff') format('woff'),
+		url('../fonts/PressStart2P.ttf') format('truetype'),
+		url('../fonts/PressStart2P.svg#PressStart2P') format('svg');
 	font-weight: 500;
 	font-style: normal;
 }
@@ -64,7 +64,7 @@ html, body {
 
 html.guessing {
 	background-repeat: repeat;
-	background-image: url('/static/images/guess.gif');
+	background-image: url('../images/guess.gif');
 	background-size: 100px 100px;
 	background-position: 0px 0px;
 	animation: animatedBackground 10s linear infinite;
