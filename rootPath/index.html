@@ -33,7 +33,7 @@
       <div class='jp-title'></div>
       <div class='jp-seek-bar'><div class='jp-play-bar'></div></div>
     </div>
-    <script type='template/ejs' id='leaderBoard'>
+    <script type='template/ejs' id='LeaderBoard'>
       <div class='row'>
         <div class='col-md-12'>
           <div class='jumbotron rainbowtron'>
@@ -50,6 +50,25 @@
             </li>
           <% }) %>
           </ol>
+        </div>
+      </div>
+    </script>
+    <script type='template/ejs' id='GameSelect'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Select your game!</h1>
+          <div id='Games' class='card-deck'>
+          <% games.forEach((game, index) => { %>
+            <div class='card card-victory mb-4'>
+              <h5 class='card-title'><%=game.name%></h5>
+              <div class='card-body' style='background-image: url(/static/images/static.gif)'>
+                <a href='/<%=game.guid%>' data-choice='<%=(index+1)%>'>
+                  <%=(index+1)%>
+                </a>
+              </div>
+              <div class='card-footer'><%=game.platforms%></div>
+            </div>
+          <% }) %>
         </div>
       </div>
     </script>
@@ -81,25 +100,6 @@
             <button id='No' class='btn btn-danger pull-left'>No</button>
             <button id='Yes' class='btn btn-success pull-right'>Yes</button>
           </div>
-        </div>
-      </div>
-    </script>
-    <script type='template/ejs' id='GameSelect'>
-      <div class='row'>
-        <div class='col-md-12'>
-          <h1>Select your game!</h1>
-          <div id='Games' class='card-deck'>
-          <% games.forEach((game, index) => { %>
-            <div class='card card-victory mb-4'>
-              <h5 class='card-title'><%=game.name%></h5>
-              <div class='card-body' style='background-image: url(/static/images/static.gif)'>
-                <a href='/<%=game.guid%>' data-choice='<%=(index+1)%>'>
-                  <%=(index+1)%>
-                </a>
-              </div>
-              <div class='card-footer'><%=game.platforms%></div>
-            </div>
-          <% }) %>
         </div>
       </div>
     </script>

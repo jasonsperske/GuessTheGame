@@ -14,7 +14,6 @@
         }
         $('html').css({ 'background-image': `url(${path})` });
       },
-      template: {},
       teams: [
         { guid: '000', name: 'Mortal Kombat' },
         { guid: '001', name: 'Tetris' },
@@ -30,7 +29,11 @@
     }
   };
 
-  RandomVictory.ui.template.leaderBoard = RandomVictory.ui.compileTemplate('leaderBoard');
+  const template = {
+    LeaderBoard: RandomVictory.ui.compileTemplate('LeaderBoard'),
+    GameSelect: RandomVictory.ui.compileTemplate('GameSelect'),
+    PlayRound: RandomVictory.ui.compileTemplate('PlayRound')
+  };
 
   RandomVictory.showLeaderboard = () => {
 
