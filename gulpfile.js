@@ -1,5 +1,5 @@
 const gulp = require('gulp')
-const uglify = require('gulp-uglify')
+const terser = require('gulp-terser')
 const sass = require('gulp-sass')
 const cleanCSS = require('gulp-clean-css')
 const flatten = require('gulp-flatten')
@@ -16,7 +16,7 @@ function javascript () {
     'src/js/clippy.js',
     'src/js/ejs.js',
     'src/js/randomvictory.js'], { base: '.' })
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(concat('randomvictory.min.js'))
     .pipe(gulp.dest('rootPath/js/'))
 }
