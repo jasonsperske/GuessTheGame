@@ -8,7 +8,7 @@
       wallpaper (src, optTrack) {
         let path;
         if (optTrack) {
-          path = `games/${src.game.guid}/${src.song[track].wallpaper}`;
+          path = `games/${src.game.guid}/${src.game.song[optTrack].wallpaper}`;
         } else {
           path = `images/${src}`;
         }
@@ -25,57 +25,144 @@
         { guid: '007', name: 'Mario' },
         { guid: '008', name: 'Donkey Kong' },
         { guid: '009', name: 'Space Invaders' }
-      ]
+      ],
+      async loadData (path) {
+        return (async (path) => {
+          const response = await fetch(path);
+          return response.json();
+        })(path);
+      },
+      /** adapted from https://stackoverflow.com/a/2450976/16959 */
+      shuffle (array) {
+        let currentIndex = array.length;
+        let temporaryValue;
+        let randomIndex;
+
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
+      }
     }
   };
-
+  const canvas = $('#main');
   const template = {
-    LeaderBoard: RandomVictory.ui.compileTemplate('LeaderBoard'),
+    Leaderboard: RandomVictory.ui.compileTemplate('Leaderboard'),
     GameSelect: RandomVictory.ui.compileTemplate('GameSelect'),
     PlayRound: RandomVictory.ui.compileTemplate('PlayRound')
   };
+  let cohost;
 
-  RandomVictory.showLeaderboard = () => {
-
+  RandomVictory.createNewPanel = async () => {
+    const unplayedGames = await RandomVictory.ui.loadData('games/index.json');
+    return {
+      teams: RandomVictory.ui.shuffle(RandomVictory.ui.teams),
+      unplayedGames: unplayedGames.games,
+      playedCount: 0
+    };
   };
-  RandomVictory.offerChoices = (team) => {
-    clippy.load({ name: 'Clippy', path: 'images/agents/' },
-      (agent) => {
-        agent.show();
-        agent.speak('Welcome to your doom!');
-      });
 
-    document.onkeypress = (e) => {
-      const game = $('a[data-choice=' + (e.charCode - 48) + ']');
-      if (game.length === 1) {
-        window.location.href = game.attr('href');
+  RandomVictory.loadPanel = async () => {
+    let paxData = window.localStorage.getItem('GuessTheGame');
+    if (paxData) {
+      return JSON.parse(paxData);
+    } else {
+      let pax = await RandomVictory.createNewPanel();
+      RandomVictory.savePanel(pax);
+      return pax;
+    }
+  }
+  RandomVictory.savePanel = (panel) => {
+    window.localStorage.setItem('GuessTheGame', JSON.stringify(panel));
+  }
+
+  RandomVictory.showLeaderboard = async (panel) => {
+    RandomVictory.ui.wallpaper('titlescreen.gif');
+    panel.teams = panel.teams.sort((a, b) => {
+      if (a.score && b.score) {
+        return b.score - a.score;
+      } else if (a.score) {
+        return -1;
+      } else if (b.score) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    canvas.html(template.Leaderboard(panel));
+    document.onkeypress = async (e) => {
+      if (e.charCode >= 48 && e.charCode <= 57) {
+        if (e.charCode === 48) {
+          panel.currentTeamIndex = 9;
+        } else {
+          panel.currentTeamIndex = e.charCode - 49;
+        }
+
+        panel.unplayedGames = RandomVictory.ui.shuffle(panel.unplayedGames);
+        let games = panel.unplayedGames.slice(0,3);
+        panel.games = [];
+        for (let i = 0; i < games.length; i++) {
+          panel.games[i] = await RandomVictory.ui.loadData(`games/${games[i]}/index.json`);
+        }
+        RandomVictory.offerChoices(panel);
       }
     };
   };
 
-  RandomVictory.playRound = (round) => {
+  RandomVictory.offerChoices = (panel) => {
+    canvas.html(template.GameSelect(panel));
+
+    clippy.load({ name: 'Clippy', path: 'images/agents/' },
+      (agent) => {
+        cohost = agent;
+        cohost.show();
+        cohost.speak('Welcome to your doom!');
+      });
+
+    document.onkeypress = (e) => {
+      if (e.charCode >= 48 && e.charCode <= 50) {
+        const game = $('a[data-choice=' + (e.charCode - 48) + ']');
+        if (game.length === 1) {
+          panel.unplayedGames = panel.unplayedGames.filter(g => g != game.attr('href'));
+          panel.game = panel.games[e.charCode - 49];
+          RandomVictory.playRound(panel);
+        }
+      }
+    };
+  };
+
+  RandomVictory.playRound = (panel) => {
+    RandomVictory.savePanel(panel);
+    canvas.html(template.PlayRound(panel));
+
     const buttons = $('#Buttons');
     const clock = $('#Clock');
     const start = new Date();
 
     let player;
-    let agent;
     let currentTrack;
     let score = 0;
 
     function play (track) {
       currentTrack = track;
-      if (round.song[track].show) {
-        RandomVictory.ui.wallpaper(round, track);
+      $('[data-track].jp-playing-track').removeClass('jp-playing-track');
+      $('[data-track=' + currentTrack + ']').addClass('jp-playing-track');
+      if (panel.game.song[track].show) {
+        RandomVictory.ui.wallpaper(panel, track);
         buttons.hide();
       } else {
         $('html').removeAttr('style');
         buttons.show();
       }
-      console.log(round.song[currentTrack].name);
+      console.log(panel.game.song[currentTrack].name);
       $('#jp_container_1').fadeIn();
       player.jPlayer('setMedia', {
-        mp3: `games/${round.game.guid}/${round.song[track].song}`
+        mp3: `games/${panel.game.guid}/${panel.game.song[currentTrack].song}`
       });
       player.jPlayer('play');
     }
@@ -94,83 +181,82 @@
 
     buttons.hide();
 
-    clippy.load({ name: 'Clippy', path: 'images/agents/' }, (_agent) => {
-      agent = _agent;
-      agent.show();
-      player = $('#jplayer_1').jPlayer({
-        ready() {
-          $('#No').on('click', () => {
-            player.jPlayer('play');
-            $('html').removeClass('guessing');
-            if (round.song[currentTrack].hint.length > 0) {
-              const hint = round.song[currentTrack].hint.shift();
-              console.log(round.song[currentTrack].name + ':' + hint);
-              agent.speak(hint);
-            } else {
-              agent.speak('There are no more hints!');
-              round.song[currentTrack].show = true;
-              RandomVictory.ui.wallpaper(round, track);
-              $('[data-track=' + currentTrack + ']').html(round.song[currentTrack].name);
-              buttons.hide();
-            }
-          });
-          $('#Yes').on('click', () => {
-            let points = round.song[currentTrack].hint.length + 1;
-            player.jPlayer('play');
-            $('html').removeClass('guessing');
-            score += points;
-            $('#Score').html(score);
-            agent.speak('+' + points + ' points!');
-            round.song[currentTrack].show = true;
-            RandomVictory.ui.wallpaper(round, track);
-            $('[data-track=' + currentTrack + ']').html(round.song[currentTrack].name);
+    player = $('#jplayer_1').jPlayer({
+      ready() {
+        $('#No').on('click', () => {
+          player.jPlayer('play');
+          $('html').removeClass('guessing');
+          if (panel.game.song[currentTrack].hint.length > 0) {
+            const hint = panel.game.song[currentTrack].hint.shift();
+            console.log(panel.game.song[currentTrack].name + ':' + hint);
+            cohost.speak(hint);
+          } else {
+            cohost.speak('There are no more hints!');
+            panel.game.song[currentTrack].show = true;
+            RandomVictory.ui.wallpaper(panel, currentTrack);
+            $('[data-track=' + currentTrack + ']').html(panel.game.song[currentTrack].name);
             buttons.hide();
-          });
-          $('[data-track]').on('click', () => {
-            play($(this).data('track'));
-          });
-          setInterval(() => {
-            clock.html(time(start, new Date()));
-          }, 500);
-          $('[data-track=0]').trigger('click');
-          agent.speak(round.game.hint);
-          console.log(round.game.hint);
-        },
-        swfPath: 'js',
-        supplied: 'mp3'
-      }).on($.jPlayer.event.ended, () => {
-        play(currentTrack);
-      });
+          }
+        });
+        $('#Yes').on('click', () => {
+          let points = panel.game.song[currentTrack].hint.length + 1;
+          player.jPlayer('play');
+          $('html').removeClass('guessing');
+          score += points;
+          $('#Score').html(score);
+          cohost.speak('+' + points + ' points!');
+          panel.game.song[currentTrack].show = true;
+          RandomVictory.ui.wallpaper(panel, currentTrack);
+          $('[data-track=' + currentTrack + ']').html(panel.game.song[currentTrack].name);
+          buttons.hide();
+        });
+        $('li[data-track]').on('click', (e) => {
+          play($(e.currentTarget).data('track'));
+        });
+        setInterval(() => {
+          clock.html(time(start, new Date()));
+        }, 500);
+        $('li[data-track=0]').trigger('click');
+        cohost.speak(panel.game.hint);
+        console.log(panel.game.hint);
+      },
+      swfPath: 'js',
+      supplied: 'mp3'
+    }).on($.jPlayer.event.ended, () => {
+      play(currentTrack);
     });
 
     document.onkeypress = (e) => {
       let keyMap = {
         '110' () {
-          $('#No').trigger('click');
+          $('#No').trigger('click');1
         },
         '121' () {
           $('#Yes').trigger('click');
         },
         '103' () {
           // GUESS
-          if (!round.song[currentTrack].show) {
+          if (!panel.game.song[currentTrack].show) {
             player.jPlayer('pause');
             $('html').addClass('guessing');
           }
         }
       };
       if (e.charCode >= 48 && e.charCode <= 57) {
-        if (round.song[currentTrack].show) {
-          if (e.charCode === 48) {
-            $('[data-track=9]').trigger('click');
-          } else {
-            $('[data-track=' + (e.charCode - 49) + ']').trigger('click');
-          }
+        if (e.charCode === 48) {
+          $('[data-track=9]').trigger('click');
+        } else {
+          $('[data-track=' + (e.charCode - 49) + ']').trigger('click');
         }
       } else if (keyMap.hasOwnProperty(e.charCode)) {
         keyMap[e.charCode]();
       }
     };
+  };
+
+  RandomVictory.start = async () => {
+    let paxData = await RandomVictory.loadPanel();
+    RandomVictory.showLeaderboard(paxData);
   };
 
   window.RandomVictory = RandomVictory;
