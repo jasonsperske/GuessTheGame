@@ -1,5 +1,6 @@
 /* globals $, ejs, clippy */
 (function (window) {
+  const ROUND_LENGTH = 6 * 60; //6:00 Per Round
   const RandomVictory = {
     ui: {
       compileTemplate (id) {
@@ -7,10 +8,10 @@
       },
       wallpaper (src, optTrack) {
         let path;
-        if (optTrack) {
-          path = `games/${src.game.guid}/${src.game.song[optTrack].wallpaper}`;
-        } else {
+        if (typeof optTrack === 'undefined') {
           path = `images/${src}`;
+        } else {
+          path = `games/${src.game.guid}/${src.game.song[optTrack].wallpaper}`;
         }
         $('html').css({ 'background-image': `url(${path})` });
       },
@@ -128,7 +129,8 @@
       if (e.charCode >= 48 && e.charCode <= 50) {
         const game = $('a[data-choice=' + (e.charCode - 48) + ']');
         if (game.length === 1) {
-          panel.unplayedGames = panel.unplayedGames.filter(g => g != game.attr('href'));
+          let selected = game.attr('href').split('#')[1];
+          panel.unplayedGames = panel.unplayedGames.filter(g => g != selected);
           panel.game = panel.games[e.charCode - 49];
           RandomVictory.playRound(panel);
         }
@@ -168,8 +170,7 @@
     }
 
     function time (start, end) {
-      // 6:00 on the clock
-      const duration = (6 * 60) - ((end.getTime() - start.getTime()) / 1000);
+      const duration = ROUND_LENGTH - ((end.getTime() - start.getTime()) / 1000);
       if (duration > 0) {
         const min = Math.floor((duration / 60) << 0);
         const sec = Math.floor(duration % 60);
@@ -178,7 +179,18 @@
         return '0:00';
       }
     }
-
+    function totalScore () {
+      let revealed = 0;
+      panel.game.song.forEach((song) => {
+        if (song.show) {
+          revealed += 1;
+        }
+      });
+      if (revealed === panel.game.song.length) {
+        panel.teams[panel.currentTeamIndex].score = score;
+        RandomVictory.savePanel(panel);
+      }
+    }
     buttons.hide();
 
     player = $('#jplayer_1').jPlayer({
@@ -196,6 +208,7 @@
             RandomVictory.ui.wallpaper(panel, currentTrack);
             $('[data-track=' + currentTrack + ']').html(panel.game.song[currentTrack].name);
             buttons.hide();
+            totalScore();
           }
         });
         $('#Yes').on('click', () => {
@@ -209,6 +222,7 @@
           RandomVictory.ui.wallpaper(panel, currentTrack);
           $('[data-track=' + currentTrack + ']').html(panel.game.song[currentTrack].name);
           buttons.hide();
+          totalScore();
         });
         $('li[data-track]').on('click', (e) => {
           play($(e.currentTarget).data('track'));

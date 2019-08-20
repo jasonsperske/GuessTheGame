@@ -6,17 +6,6 @@
   "song": [
     {
       "hint": [
-        "Released in North America on May 31, 1999",
-        "\"The greatest N64 game of all time\" - said nobody ever",
-        "The first 3D game featuring the title character"
-      ],
-      "platform": "N64",
-      "name": "Superman",
-      "song": "Superman64.mp3",
-      "wallpaper": "Superman64.png"
-    },
-    {
-      "hint": [
         "Released in 1995 and developed and published by Sega, also came with it's soundtrack on CD",
         "Technically speaking not based on a real comic",
         "A game is that it is set within the panels of a comic book"
@@ -25,6 +14,17 @@
       "name": "Comix Zone",
       "song": "ComixZone.mp3",
       "wallpaper": "ComixZone.jpg"
+    },
+    {
+      "hint": [
+        "Released in North America on May 31, 1999",
+        "\"The greatest N64 game of all time\" - said nobody ever",
+        "The first 3D game featuring the title character"
+      ],
+      "platform": "N64",
+      "name": "Superman",
+      "song": "Superman64.mp3",
+      "wallpaper": "Superman64.png"
     },
     {
       "hint": [
