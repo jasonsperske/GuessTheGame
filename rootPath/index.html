@@ -18,11 +18,6 @@
       </div>
     </div>
     <div id='main' class='container'></div>
-    <div id='footer'>
-      <div class='container'>
-        <p class='text-muted'><small>Created with &#9825; by <a href='http://jason.sperske.com/'>Jason Sperske</a></small></p>
-      </div>
-    </div>
     <div id='jplayer_1' class='jp-jplayer'></div>
     <div id='jp_container_1' class='jp-audio'>
       <div class='jp-controls'>
@@ -47,6 +42,16 @@
             </li>
           <% }) %>
           </ol>
+        </div>
+      </div>
+    </script>
+
+    <script type='template/ejs' id='Assemble'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <div class='jumbotron rainbowtron text-center'>
+            <h1><%= teams[currentTeamIndex].name %></h1>
+          </div>
         </div>
       </div>
     </script>
