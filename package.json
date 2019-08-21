@@ -10,8 +10,7 @@
     "jplayer": "^2.9.2",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
-    "popper.js": "^1.15.0",
-    "static-server": "^2.2.1"
+    "popper.js": "^1.15.0"
   },
   "devDependencies": {
     "gulp": "*",
