@@ -126,12 +126,13 @@
       });
 
     document.onkeypress = (e) => {
-      if (e.charCode >= 48 && e.charCode <= 50) {
-        const game = $('a[data-choice=' + (e.charCode - 48) + ']');
+      if (e.charCode >= 49 && e.charCode <= 51) {
+        const gameIndex = e.charCode - 49;
+        const game = $(`a[data-choice=${gameIndex}]`);
         if (game.length === 1) {
           let selected = game.attr('href').split('#')[1];
-          panel.unplayedGames = panel.unplayedGames.filter(g => g != selected);
-          panel.game = panel.games[e.charCode - 49];
+          panel.unplayedGames = panel.unplayedGames.filter(g => g !== selected);
+          panel.game = panel.games[gameIndex];
           RandomVictory.playRound(panel);
         }
       }
@@ -146,6 +147,7 @@
     const clock = $('#Clock');
     const start = new Date();
 
+    let gameTimer;
     let player;
     let currentTrack;
     let score = 0;
@@ -179,14 +181,14 @@
         return '0:00';
       }
     }
-    function totalScore () {
+    function totalScore (optForceSave) {
       let revealed = 0;
       panel.game.song.forEach((song) => {
         if (song.show) {
           revealed += 1;
         }
       });
-      if (revealed === panel.game.song.length) {
+      if (optForceSave || revealed === panel.game.song.length) {
         panel.teams[panel.currentTeamIndex].score = score;
         RandomVictory.savePanel(panel);
       }
@@ -212,23 +214,30 @@
           }
         });
         $('#Yes').on('click', () => {
-          let points = panel.game.song[currentTrack].hint.length + 1;
-          player.jPlayer('play');
-          $('html').removeClass('guessing');
-          score += points;
-          $('#Score').html(score);
-          cohost.speak('+' + points + ' points!');
-          panel.game.song[currentTrack].show = true;
-          RandomVictory.ui.wallpaper(panel, currentTrack);
-          $('[data-track=' + currentTrack + ']').html(panel.game.song[currentTrack].name);
-          buttons.hide();
-          totalScore();
+          if (!panel.game.song[currentTrack].show) {
+            let points = panel.game.song[currentTrack].hint.length + 1;
+            player.jPlayer('play');
+            $('html').removeClass('guessing');
+            score += points;
+            $('#Score').html(score);
+            cohost.speak('+' + points + ' points!');
+            panel.game.song[currentTrack].show = true;
+            RandomVictory.ui.wallpaper(panel, currentTrack);
+            $('[data-track=' + currentTrack + ']').html(panel.game.song[currentTrack].name);
+            buttons.hide();
+            totalScore();
+          }
         });
         $('li[data-track]').on('click', (e) => {
           play($(e.currentTarget).data('track'));
         });
-        setInterval(() => {
-          clock.html(time(start, new Date()));
+        gameTimer = setInterval(() => {
+          let timeRemaining = time(start, new Date());
+          clock.html(timeRemaining);
+          if (timeRemaining === '0:00') {
+            clearInterval(gameTimer);
+            totalScore(true);
+          }
         }, 500);
         $('li[data-track=0]').trigger('click');
         cohost.speak(panel.game.hint);
