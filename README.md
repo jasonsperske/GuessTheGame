@@ -1,7 +1,18 @@
 # GuessTheGame
 A simple game to play with a room full of awesome people.
 
-## How to create a game
+## How to run a full panel
+This software will run a full panel by reading the contents of a file called `rootPath/games/index.json` file (which is .gitignored).  The contents are an array of the available games like this:
+
+    {
+      "games": [
+        "AsSeenOnTV",
+        "ComicsGames",
+        "ThumbsArntEnought"
+      ]
+    }
+
+## How to create a round
 Games are defined in folders created in the `/rootPath/games` directory.  Simple create a new folder, and add an `index.json` with your game information.  An example of such a game might look like this:
 
     {
@@ -31,4 +42,4 @@ Any program that can host a static folder on a port via HTTP will work. Here are
 Python 3.6+
 
     cd rootPath
-    python -m http.server 9000
+    python3 -m http.server 9000
