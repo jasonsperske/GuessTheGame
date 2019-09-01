@@ -16,16 +16,16 @@
         $('html').css({ 'background-image': `url(${path})` });
       },
       teams: [
-        { guid: '000', name: 'Mortal Kombat' },
-        { guid: '001', name: 'Tetris' },
-        { guid: '002', name: 'Super Metroid' },
-        { guid: '003', name: 'Sonic' },
-        { guid: '004', name: 'Star Fox' },
-        { guid: '005', name: 'Skulls' },
-        { guid: '006', name: 'Mega Man' },
-        { guid: '007', name: 'Mario' },
-        { guid: '008', name: 'Donkey Kong' },
-        { guid: '009', name: 'Space Invaders' }
+        { guid: '000', name: 'Flower' },
+        { guid: '001', name: 'Kooper' },
+        { guid: '002', name: 'Spyhunter' },
+        { guid: '003', name: 'Doom (night vision)' },
+        { guid: '004', name: 'Knight' },
+        { guid: '005', name: 'Mario Axe' },
+        { guid: '006', name: 'Castlevania' },
+        { guid: '007', name: 'Tetris' },
+        { guid: '008', name: 'Mario Coin' },
+        { guid: '009', name: 'Comix Zone' }
       ],
       async loadData (path) {
         return (async (path) => {
